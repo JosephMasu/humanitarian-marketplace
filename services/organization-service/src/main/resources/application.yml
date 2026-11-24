@@ -1,0 +1,33 @@
+# Defaults for running from the IDE against `docker compose up postgres keycloak`.
+# Every value can be overridden by environment variables (ADR-0001),
+# e.g. SPRING_DATASOURCE_URL, SERVER_PORT.
+spring:
+  application:
+    name: organization-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/organization_service
+    username: organization_service
+    password: organization_service
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          # Must match the `iss` claim Keycloak puts in tokens.
+          issuer-uri: http://localhost:8180/realms/humanitarian-marketplace
+
+server:
+  port: 8082
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    health:
+      probes:
+        enabled: true

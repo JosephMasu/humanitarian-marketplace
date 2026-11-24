@@ -1,0 +1,54 @@
+{
+  "realm": "humanitarian-marketplace",
+  "enabled": true,
+  "registrationAllowed": true,
+  "loginWithEmailAllowed": true,
+  "duplicateEmailsAllowed": false,
+  "resetPasswordAllowed": true,
+  "sslRequired": "external",
+  "roles": {
+    "realm": [
+      { "name": "platform-admin", "description": "Operates the marketplace" },
+      { "name": "ngo-staff", "description": "Works for a humanitarian organization" },
+      { "name": "supplier", "description": "Offers goods or services" },
+      { "name": "donor", "description": "Funds requests" }
+    ]
+  },
+  "clients": [
+    {
+      "clientId": "marketplace-web",
+      "name": "Marketplace web app",
+      "enabled": true,
+      "publicClient": true,
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": true,
+      "redirectUris": ["http://localhost:3000/*", "http://localhost:8080/*"],
+      "webOrigins": ["+"],
+      "attributes": {
+        "pkce.code.challenge.method": "S256"
+      }
+    }
+  ],
+  "users": [
+    {
+      "username": "dev-ngo",
+      "email": "dev-ngo@example.org",
+      "emailVerified": true,
+      "firstName": "Dev",
+      "lastName": "NGO",
+      "enabled": true,
+      "credentials": [{ "type": "password", "value": "dev-password", "temporary": false }],
+      "realmRoles": ["ngo-staff"]
+    },
+    {
+      "username": "dev-admin",
+      "email": "dev-admin@example.org",
+      "emailVerified": true,
+      "firstName": "Dev",
+      "lastName": "Admin",
+      "enabled": true,
+      "credentials": [{ "type": "password", "value": "dev-password", "temporary": false }],
+      "realmRoles": ["platform-admin"]
+    }
+  ]
+}

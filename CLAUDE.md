@@ -55,7 +55,7 @@ Microservices monorepo. Services live under `services/`, shared infra under `inf
 - Schema changes go through Flyway migrations (`src/main/resources/db/migration`), never `ddl-auto=update`.
 - Every service exposes OpenAPI via SpringDoc, Actuator + Prometheus metrics, and OpenTelemetry tracing.
 - Document Kafka topics and event payloads in `docs/events/`; REST contracts in `docs/api/`.
-- Build with Maven (`./mvnw`) from the root aggregator POM.
+- Build with Maven 3.9+ (`mvn verify`) from the root aggregator POM. (Maven Wrapper not added yet.)
 - Tests: JUnit 5; integration tests use Testcontainers (PostgreSQL, Kafka, Keycloak, Redis) — no H2 or in-memory substitutes.
 - Some installed skills (e.g. `tdd`, `prototype`, `codebase-design`) have TypeScript examples. Apply the same principles in idiomatic Java/Spring.
 
