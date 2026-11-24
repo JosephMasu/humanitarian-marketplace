@@ -1,0 +1,19 @@
+# Build output
+target/
+
+# Local environment overrides (may hold secrets)
+.env
+
+# IntelliJ (shared project settings stay committed; see .idea/.gitignore)
+*.iml
+out/
+
+# VS Code / Eclipse
+.vscode/
+.classpath
+.project
+.settings/
+
+# OS
+.DS_Store
+Thumbs.db

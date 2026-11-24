@@ -1,0 +1,36 @@
+# Defaults for running from the IDE. Override with environment variables (ADR-0001),
+# e.g. USER_SERVICE_URL=http://user-service:8080 inside Docker Compose or Kubernetes.
+spring:
+  application:
+    name: api-gateway
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8180/realms/humanitarian-marketplace
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: user-service
+              uri: ${USER_SERVICE_URL:http://localhost:8081}
+              predicates:
+                - Path=/api/users/**
+            - id: organization-service
+              uri: ${ORGANIZATION_SERVICE_URL:http://localhost:8082}
+              predicates:
+                - Path=/api/organizations/**
+
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    health:
+      probes:
+        enabled: true
